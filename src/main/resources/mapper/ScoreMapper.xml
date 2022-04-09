@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruilan.recoveryarm.dao.ScoreMapper">
+    <insert id="insertScore" parameterType="score">
+        insert into score(userId, modeGroup, score, doGroup, doIndex) values (#{userId}, #{modeGroup}, #{score}, #{doGroup}, #{doIndex})
+    </insert>
+    <select id="findScoreByUid" resultType="score">
+        select * from score where userId = #{userId}
+    </select>
+    <select id="findScoreGroupByUid" resultType="score">
+        select * from score where userId = #{userId} and doGroup = #{doGroup}
+    </select>
+    <select id="findScoreByUidAndDoIndex" resultType="score">
+        select * from score where userId = #{userId} and doIndex = #{doIndex}
+    </select>
+    <select id="getStandard" resultType="java.lang.String">
+        select std from standard where sid = #{sid}
+    </select>
+    <select id="findAllStandard" resultType="java.lang.String">
+        select std from standard
+    </select>
+    <select id="findUserDoGroupMax" resultType="int">
+        select max(doGroup) from score where userId = #{userId}
+    </select>
+    <select id="findMaxDoGroup" resultType="int">
+        select max(doGroup) from score
+    </select>
+    <select id="getCount" resultType="int">
+        select count(*) from score
+    </select>
+    <select id="findUserDoGroup" resultType="int">
+        select distinct doGroup from score where userId = #{userId}
+    </select>
+</mapper>

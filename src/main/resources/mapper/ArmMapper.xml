@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruilan.recoveryarm.dao.ArmMapper">
+    <select id="getAllArmDatas" resultType="arm">
+        select *
+        from arm
+        where modeGroup = #{modeGroup}
+    </select>
+    <select id="getAllArmQuaterData" resultType="quater">
+        select *
+        from arm_quater
+        where modeGroup = #{modeGroup}
+    </select>
+    <select id="getMaxGroupNum" resultType="int">
+        select max(modeGroup)
+        from arm
+    </select>
+    <select id="getMaxQuaterGroupNum" resultType="int">
+        select max(modeGroup)
+        from arm_quater
+    </select>
+    <select id="getAllGroupNum" resultType="int">
+        select distinct modeGroup
+        from arm
+    </select>
+    <select id="getAllQuaterGroupNum" resultType="int">
+        select distinct modeGroup
+        from arm_quater
+    </select>
+    <select id="getCount" resultType="int">
+        select count(*)
+        from arm
+    </select>
+    <select id="getQuaterCount" resultType="int">
+        select count(*)
+        from arm_quater
+    </select>
+    <select id="getExerStartTime" resultType="long">
+        select min(msec)
+        from arm
+        where modeGroup = #{modeGroup}
+    </select>
+    <select id="getQuaterExerStartTime" resultType="long">
+        select min(msec)
+        from arm_quater
+        where modeGroup = #{modeGroup}
+    </select>
+    <select id="armCount" resultType="int">
+        select count(*)
+        from arm
+    </select>
+    <select id="armQuaterCount" resultType="int">
+        select count(*)
+        from arm_quater
+    </select>
+
+    <insert id="batchInsert" parameterType="list">
+        insert into arm (msec, txa, tya, tza, bxa, bya, bza, modeGroup, doIndex)
+        values
+        <foreach collection="list" item="armItem" separator=",">
+            (#{armItem.msec},#{armItem.txa},#{armItem.tya},#{armItem.tza},#{armItem.bxa},#{armItem.bya},#{armItem.bza},#{armItem.modeGroup},#{armItem.doIndex})
+        </foreach>
+    </insert>
+
+    <insert id="batchInsertQuater" parameterType="list">
+        insert into arm_quater (msec, tq0, tq1, tq2, tq3, bq0, bq1, bq2, bq3, modeGroup)
+        values
+        <foreach collection="list" item="armItem" separator=",">
+            (#{armItem.msec},#{armItem.tq0},#{armItem.tq1},#{armItem.tq2},#{armItem.tq3},#{armItem.bq0},#{armItem.bq1},#{armItem.bq2},#{armItem.bq3},#{armItem.modeGroup})
+        </foreach>
+    </insert>
+</mapper>

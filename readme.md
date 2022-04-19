@@ -1,0 +1,2 @@
+基于RNN的脑卒中患者康复评估系统(后端)
+技术栈为Spring Boot，使用MySQL作为数据库，ORM框架为MyBatis

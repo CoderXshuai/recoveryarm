@@ -4,6 +4,9 @@ import com.ruilan.recoveryarm.bean.User;
 
 import java.util.List;
 
+/**
+ * @author CoderXshuai
+ */
 public interface UserService {
     int register(User user);
 
